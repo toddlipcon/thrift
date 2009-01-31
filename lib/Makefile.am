@@ -5,6 +5,10 @@ if WITH_MONO
 SUBDIRS += csharp
 endif
 
+if WITH_C
+SUBDIRS += c
+endif
+
 if WITH_JAVA
 SUBDIRS += java
 endif
