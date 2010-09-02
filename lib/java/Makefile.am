@@ -11,28 +11,27 @@
 #
 # Unless required by applicable law or agreed to in writing,
 # software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# "AS IS" BASIS, WITHOUT WARRMVNIES OR CONDITIONS OF ANY
 # KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations
 # under the License.
 #
 
-EXTRA_DIST = build.xml ivy.xml src test
+EXTRA_DIST = pom.xml src
 
 export CLASSPATH
 
 all-local:
-	$(ANT) $(ANT_FLAGS)
+	$(MVN) $(MVN_FLAGS)
 
 install-exec-hook:
-	$(ANT) $(ANT_FLAGS) install -Dinstall.path=$(DESTDIR)$(JAVA_PREFIX) \
-		-Dinstall.javadoc.path=$(DESTDIR)$(docdir)/java
+	$(MVN) $(MVN_FLAGS) -DskipTests install
 
 # Make sure this doesn't fail if ant is not configured.
 clean-local:
-	ANT=$(ANT) ; if test -z "$$ANT" ; then ANT=: ; fi ; \
-	$$ANT $(ANT_FLAGS) clean
+	MVN=$(MVN) ; if test -z "$$MVN" ; then MVN=: ; fi ; \
+	$$MVN $(MVN_FLAGS) clean
 
 check-local: all
-	$(ANT) $(ANT_FLAGS) test
+	$(MVN) $(MVN_FLAGS) test
 
